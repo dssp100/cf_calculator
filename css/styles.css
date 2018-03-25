@@ -24,6 +24,12 @@ body {
   text-align: right;
   font-size: 40px
 }
+/* remove up/down arrows on screen */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .calc-buttons {
   padding: 20px;
