@@ -62,8 +62,16 @@ $(document).ready(function() {
         result = num1 * num2;
 
     }
-    $("#number").html(result.toFixed(1));
-    console.log("result is " + result.toFixed(1));
+
+    if($(this).text().match('.')) {
+      $("#number").html(result);
+      console.log("result is " + result);
+    } else {
+      $("#number").html(result.toFixed(1));
+      console.log("result is " + result.toFixed(1));
+    }
+
+
   });
 
   // Resetting the sceen and values
