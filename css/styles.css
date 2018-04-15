@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  outline:none;
 }
 
 body {
@@ -26,17 +27,23 @@ body {
 
 }
 
-.screen input{
-  background: none;
-  color: green;
+.screen{
   width: 100%;
-  padding: 20px;
-  text-align: right;
-  font-size: 40px;
+  height: 72px;
+  background: rgba(240, 241, 239, 1.000);
   border-radius: 10px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.5),
               inset 5px 5px 8px rgba(0,0,0,0.5);
+  padding: 10px;
+  text-align: right;
+  font-size: 15px;
+  color: rgba(115, 116, 114, 1.000);
 }
+.screen h1{
+  margin: 8px 5px 2px 0px;
+
+}
+
 ::placeholder {
     color: rgba(115, 116, 114, 1.000);
 }
@@ -69,7 +76,15 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
   box-shadow: 2px 2px rgba(150, 152, 144, 1.000), 5px 5px 5px rgba(0, 0, 0, 0.74);
   background: rgba(240, 241, 239, 1.000);
+  top: 0px;
+  transition: all ease 0.3s
 }
+
+.input-button:active{
+  box-shadow: 0.5px 0.5px rgba(150, 152, 144, 1.000), 2px 2px 2px rgba(0, 0, 0, 0.74);
+  top: 3px;
+}
+
 
 .equals {
   grid-column: span 4;
