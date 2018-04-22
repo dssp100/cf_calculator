@@ -1,107 +1,88 @@
+$(document).ready(function(){
 
-// Wait for document to finish loading
-$(document).ready(function() {
-  console.log( "document loaded" );
+  // Store user inputs
+  var inputs = [""];
 
-  // Variables
-  var firstNumber = [];
-  var secondNumber = [];
-  var operator;
-  var lock = false;
+  // String to store current input string
+  var totalString;
 
-  // Setting the display to zero
-  $("#number").html("0");
+  // Operators array for validation without the " . "
+  var operators = ["+","−","÷","×"];
 
-  // Getting the value of the numbers
-  $(".number").on("click", function(){
-    // $('.input-button')($(this).css('box-shadow',"none"));
+  // Dot array for validation
+  var dot = ["."];
+
+  // Numbers array for validation
+  var numbers = [0,1,2,3,4,5,6,7,8,9];
+
+  function getValue(input){
+    if(dot.includes(inputs[inputs.length-1] === true && input === ".")) {
+      console.log("Duplicate dot")
+    } else if(inputs.lenght === 1 && operators.includes(input) === false) {
+      inputs.push(input);
+    } else if(dot.includes(inputs[inputs.length-1]) === false) {
+      inputs.push(input);
+    } else if(numbers.includes(Number(input))) {
+      inputs.push(input);
+      console.log("number input")
+    }
+    update();
+  };
+
+  function update(){
+    totalString = inputs.join("");
+    $("#number").html(totalString);
+  };
+
+  function calculateTotal(){
+    totalString = inputs.join("");
+    $("#number").html(eval(totalString));
+    return eval(totalString)
+  };
+
+  function calculatePercentage(){
+    totalString = calculateTotal()
+    var percentString = totalString / 100;
+    inputs = [percentString.toString()]
+    $("#number").html(percentString)
+  };
+
+  function calculateSquareRoot(){
+    totalString = calculateTotal()
+    var squareRootString = Math.sqrt(totalString);
+    inputs = [squareRootString.toString()]
+    $("#number").html(squareRootString)
+  };
 
 
+  $(".button").on("click", function(){
+    if(this.id === "AC"){
+      inputs=[""];
+      update();
+      $("#number").html("0")
 
-    if(lock === false){
-      firstNumber.push($(this).attr("value"))
-      $("#number").html(firstNumber.join(""));
-      console.log(firstNumber);
+    } else if(this.id === "CE"){
+      inputs.pop();
+      update();
+
+    } else if(this.id === "equals"){
+      calculateTotal();
+
+    } else if(this.id === "%") {
+      calculatePercentage();
+
+    } else if(this.id === "√") {
+      calculateSquareRoot();
 
     } else {
-      secondNumber.push($(this).attr("value"))
-      $("#number").html(secondNumber.join(""));
-      console.log(secondNumber);
-    }
-  });
-
-
-
-  // Getting the value of the operators
-  $(".operator").on("click", function(){
-    lock = true;
-    operator = ($(this).children().html());
-    $("#number").html(operator);
-    console.log(operator);
-  });
-
-  // Calculating the reuslt
-  $(".equals").on("click", function(){
-    var num1 = parseFloat(firstNumber.join("")); //Convert String to floating Nr and storing the val. in num1.
-    console.log(num1);
-    var num2 = parseFloat(secondNumber.join("")); //Convert String to floating Nr and storing the val. in num2.
-    console.log(num2);
-    var result;
-
-    // Comparing the operator selected and performing calculation.
-    if(operator === "+"){
-      result = num1 + num2;
-
-    } else if(operator === "−"){
-        result = num1 - num2;
-
-    } else if(operator === "÷"){
-        result = num1 / num2;
-
-    } else if(operator === "×"){
-        result = num1 * num2;
-
+      if(inputs[inputs.length-1].indexOf("+","-","/","*",".") === -1){
+        console.log("this is inputs " + inputs)
+        getValue(this.id);
+      } else {
+        getValue(this.id);
+      }
     }
 
-    if($(this).text().match('.')) {
-      $("#number").html(result);
-      console.log("result is " + result);
-    } else {
-      $("#number").html(result.toFixed(1));
-      console.log("result is " + result.toFixed(1));
-    }
-
-
   });
 
-  // Resetting the sceen and values
-  $(".clear").on("click", function(){
-    console.log($(this).attr("value"));
-    $("#number").html("0"); // Setting
-    lock = false;
-    firstNumber = [];
-    secondNumber = [];
-    operator;
-  });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}); // end of document.ready
+});
