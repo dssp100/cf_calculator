@@ -37,21 +37,21 @@ $(document).ready(function(){
   function calculateTotal(){
     totalString = inputs.join("");
     $("#number").html(eval(totalString));
-    return eval(totalString)
+    return eval(totalString);
   };
 
   function calculatePercentage(){
-    totalString = calculateTotal()
+    totalString = calculateTotal();
     var percentString = totalString / 100;
-    inputs = [percentString.toString()]
-    $("#number").html(percentString)
+    inputs = [percentString.toString()];
+    $("#number").html(percentString);
   };
 
   function calculateSquareRoot(){
-    totalString = calculateTotal()
+    totalString = calculateTotal();
     var squareRootString = Math.sqrt(totalString);
-    inputs = [squareRootString.toString()]
-    $("#number").html(squareRootString)
+    inputs = [squareRootString.toString()];
+    $("#number").html(squareRootString);
   };
 
 
@@ -76,7 +76,6 @@ $(document).ready(function(){
 
     } else {
       if(inputs[inputs.length-1].indexOf("+","-","/","*",".") === -1){
-        console.log("this is inputs " + inputs)
         getValue(this.id);
       } else {
         getValue(this.id);
